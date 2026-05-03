@@ -15,7 +15,7 @@ app.use("/api/v1/subscriptions", subscriptionRouter)
 
 app.use(errorMiddleware)
 app.use(express.json())
-app.use(express.urlencoded({extended: false}))
+app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 
 app.get("/", (req, res) => {
