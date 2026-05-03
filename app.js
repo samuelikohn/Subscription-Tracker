@@ -1,20 +1,21 @@
-var express = require('express');
-var path = require('path');
-var cookieParser = require('cookie-parser');
-var logger = require('morgan');
+import express from "express"
+import { PORT } from "./config/env"
+import userRouter from "./routes/user.routes"
+import authRouter from "./routes/user.routes"
+import subscriptionRouter from "./routes/user.routes"
 
-var indexRouter = require('./routes/index');
-var usersRouter = require('./routes/users');
+const app = express()
 
-var app = express();
+app.use('/api/v1/auth', authRouter)
+app.use('/api/v1/users', userRouter)
+app.use('/api/v1/subscriptions', subscriptionRouter)
 
-app.use(logger('dev'));
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+app.get("/", (req, res) => {
+	res.send("Hello World")
+})
 
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
+app.listen(PORT, () => {
+	console.log(`Server running on port ${PORT}`)
+})
 
-module.exports = app;
+export default app
