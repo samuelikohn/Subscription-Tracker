@@ -37,7 +37,7 @@ export const sendReminders = serve(async (context) => {
 })
 
 const fetchSubscription = async (context, subscriptionID) => {
-	return await context.run("get subscription", () => {
+	return await context.run("get subscription", async () => {
 		return Subscription.findById(subscriptionID).populate(
 			"user",
 			"name email"
